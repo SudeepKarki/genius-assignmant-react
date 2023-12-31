@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import "the-new-css-reset";
+
+body {
+  font-family: "Ubuntu";
+  font-size: 14px;
+  background-color: #f2edf3;
+  color: #3e4b5b;
+}
+
+$topbar-height: 45px;
+$sidebar-width: 260px;
+$sidebar-width-small: 70px;
+
+.wrapper {
+  display: flex;
+}
+
+// Top Bar
+.top-bar {
+  height: $topbar-height;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.3);
+  z-index: 9;
+  h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #03499a 0%, #7db9e8 50%, #03499a 99%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// Sidebar
+.sidebar {
+  height: calc(100vh - $topbar-height);
+  position: relative;
+  background-color: #fff;
+  transition: 400ms ease;
+  a {
+    margin: 10px;
+    padding: 1.125rem 2.25rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    transition: 400ms ease;
+    &.active,
+    &:hover {
+      color: #fff;
+      background: linear-gradient(135deg, #03499a 0%, #7db9e8 50%, #03499a 99%);
+    }
+  }
+  &-close {
+    .sidebar {
+      width: $sidebar-width-small;
+      a {
+        padding: 1rem;
+        span {
+          display: none;
+        }
+      }
+    }
+    .main {
+      width: calc(100% - $sidebar-width-small);
+    }
+  }
+  &-open {
+    .sidebar {
+      width: $sidebar-width;
+    }
+    .main {
+      width: calc(100% - $sidebar-width);
+    }
+  }
+  &-toggle {
+    width: 46px;
+    height: 45px;
+    position: absolute;
+    right: 0;
+    top: -45px;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    @media (max-width: 767px) {
+      width: 100%;
+      position: relative;
+      top: auto;
+      right: auto;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}
+
+// main
+.main {
+  width: calc(100% - $sidebar-width);
+  height: calc(100vh - $topbar-height);
+  padding: 16px;
+  overflow-y: scroll;
+  transition: 400ms ease;
+}

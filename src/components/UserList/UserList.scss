@@ -1,0 +1,115 @@
+.table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  tr {
+    background-color: #fff;
+    padding: 0.35em;
+    td {
+      cursor: pointer;
+      padding: 0.85em;
+      border: 1px solid #ddd;
+    }
+    th {
+      padding: 0.85em;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid #ddd;
+      background-color: #6dabde;
+    }
+  }
+  &-no-border {
+    border: none;
+    tr {
+      td {
+        border: none;
+      }
+      th {
+        border: none;
+      }
+    }
+  }
+  &-responsive {
+    overflow-x: auto;
+  }
+  &-userlist {
+    height: calc(100vh - 136px);
+  }
+}
+
+.search-box {
+  margin-bottom: 8px;
+  padding: 8px 16px;
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #fff;
+  @media (max-width: 400px) {
+    flex-direction: column;
+    align-items: start;
+  }
+  .search-input {
+    padding: 8px;
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+  }
+}
+
+.badge {
+  padding: 4px 8px;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  &-success {
+    background-color: #28a745;
+  }
+  &-danger {
+    background-color: #dc3545;
+  }
+}
+
+// Dialog Box
+.dialog-box {
+  width: 50%;
+  padding: 30px;
+  border-radius: 8px;
+  border: 2px solid #5a98d1;
+  overflow: visible;
+  @media (max-width: 767px) {
+    width: 80%;
+  }
+}
+.package-name {
+  padding: 10px 20px;
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #03499a 0%, #7db9e8 50%, #03499a 99%);
+}
+.button-close {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 2rem;
+  cursor: pointer;
+}
