@@ -35,11 +35,7 @@ function App() {
         >
           <aside className="sidebar">
             <button onClick={toggleSidebar} className="sidebar-toggle">
-              {isOpen ? (
-                <FontAwesomeIcon icon={faChevronLeft} />
-              ) : (
-                <FontAwesomeIcon icon={faChevronRight} />
-              )}
+              <FontAwesomeIcon icon={isOpen ? faChevronLeft : faChevronRight} />
             </button>
             <nav>
               <ul>

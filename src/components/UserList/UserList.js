@@ -4,11 +4,18 @@ import "./UserList.scss";
 
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort } from "@fortawesome/free-solid-svg-icons";
+
 function UserList() {
   const [userList, setUserList] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [subscriptionList, setSubscriptionList] = useState([]);
   const [viewDetail, setViewDetail] = useState({ detail: {} });
+
+  const [sortColumn, setSortColumn] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -30,6 +37,7 @@ function UserList() {
     fetchUsers();
     fetchSubscriptions();
   }, []);
+
   const viewSubscription = (id) => {
     let user = userList.find((x) => x.id == id);
     setViewDetail({
@@ -39,9 +47,11 @@ function UserList() {
     const dialog = document.querySelector(".dialog-box");
     dialog.showModal();
   };
+
   const closeDialog = (evt) => {
     evt.target.closest("dialog").close();
   };
+
   const changeSearch = (evt) => {
     if (evt.keyCode != 13) return;
     let str = evt.target.value.toLowerCase();
@@ -61,6 +71,25 @@ function UserList() {
     );
     setFilteredUsers(filtered);
   };
+  const handleSortChange = (columnKey) => {
+    console.log(columnKey);
+    let order = "asc";
+    if (sortColumn === columnKey && sortOrder === "asc") {
+      order = "desc";
+    }
+
+    setSortColumn(columnKey);
+    setSortOrder(order);
+  };
+  const sortedData = [...filteredUsers].sort((a, b) => {
+    if (a[sortColumn] < b[sortColumn]) {
+      return sortOrder === "asc" ? -1 : 1;
+    }
+    if (a[sortColumn] > b[sortColumn]) {
+      return sortOrder === "asc" ? 1 : -1;
+    }
+    return 0;
+  });
   return (
     <>
       <dialog className="dialog-box">
@@ -68,20 +97,28 @@ function UserList() {
           <table className="table table-no-border">
             <tbody>
               <tr>
-                <td>Username :</td>
+                <td>Username</td>
                 <td>{viewDetail.username}</td>
               </tr>
               <tr>
-                <td>Email :</td>
+                <td>Email</td>
                 <td>{viewDetail.email}</td>
               </tr>
               <tr>
-                <td>Address :</td>
+                <td>Address</td>
                 <td>{viewDetail.address}</td>
               </tr>
               <tr>
-                <td>Country :</td>
+                <td>Country</td>
                 <td>{viewDetail.country}</td>
+              </tr>
+              <tr>
+                <td>Expires On</td>
+                <td>
+                  {/* {new Date(+viewDetail.detail?.expires_on)
+                    .toISOString()
+                    .substring(0, 10)} */}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -106,16 +143,52 @@ function UserList() {
           <thead>
             <tr>
               <th>S.N</th>
-              <th>User Name</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Join Date</th>
-              <th>Status</th>
+              <th>
+                User Name
+                <FontAwesomeIcon
+                  icon={faSort}
+                  onClick={() => handleSortChange("username")}
+                />
+              </th>
+              <th>
+                Full Name
+                <FontAwesomeIcon
+                  icon={faSort}
+                  onClick={() => handleSortChange("first_name")}
+                />
+              </th>
+              <th>
+                Email
+                <FontAwesomeIcon
+                  icon={faSort}
+                  onClick={() => handleSortChange("email")}
+                />
+              </th>
+              <th>
+                Address
+                <FontAwesomeIcon
+                  icon={faSort}
+                  onClick={() => handleSortChange("address")}
+                />
+              </th>
+              <th>
+                Join Date
+                <FontAwesomeIcon
+                  icon={faSort}
+                  onClick={() => handleSortChange("join_date")}
+                />
+              </th>
+              <th>
+                Status
+                <FontAwesomeIcon
+                  icon={faSort}
+                  onClick={() => handleSortChange("active")}
+                />
+              </th>
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
+            {sortedData.map((user, index) => (
               <tr key={user.id} onClick={() => viewSubscription(user.id)}>
                 <td>{index + 1}</td>
                 <td>{user.username}</td>

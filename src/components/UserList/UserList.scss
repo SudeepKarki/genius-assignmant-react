@@ -21,6 +21,11 @@
       color: #fff;
       border: 1px solid #ddd;
       background-color: #6dabde;
+      white-space: nowrap;
+      .svg-inline--fa {
+        cursor: pointer;
+        margin-left: 10px;
+      }
     }
   }
   &-no-border {
