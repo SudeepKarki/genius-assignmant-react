@@ -97,6 +97,13 @@ function UserList() {
           <table className="table table-no-border">
             <tbody>
               <tr>
+                <td>Full Name</td>
+                <td>
+                  {viewDetail.first_name} {viewDetail.middle_name}{" "}
+                  {viewDetail.last_name}
+                </td>
+              </tr>
+              <tr>
                 <td>Username</td>
                 <td>{viewDetail.username}</td>
               </tr>
@@ -114,16 +121,14 @@ function UserList() {
               </tr>
               <tr>
                 <td>Expires On</td>
-                <td>
-                  {/* {new Date(+viewDetail.detail?.expires_on)
-                    .toISOString()
-                    .substring(0, 10)} */}
-                </td>
+                <td>{viewDetail.detail?.expires_on?.substring(0, 10)}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div className="package-name">{viewDetail.detail?.package}</div>
+        <div className="package-name">
+          {viewDetail.detail ? viewDetail.detail?.package : "No Plan"}
+        </div>
 
         <button onClick={closeDialog} className="button-close">
           &times;

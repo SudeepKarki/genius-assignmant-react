@@ -45,7 +45,7 @@ function App() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeclassname="active" to="/subscriber-list">
+                  <NavLink activeclassname="active" to="/users">
                     <span>Users</span> <FontAwesomeIcon icon={faUsers} />
                   </NavLink>
                 </li>
@@ -55,7 +55,7 @@ function App() {
           <main className="main">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="subscriber-list" element={<UserList />} />
+              <Route path="users" element={<UserList />} />
             </Routes>
           </main>
         </div>
